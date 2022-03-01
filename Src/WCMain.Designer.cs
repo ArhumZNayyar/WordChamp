@@ -33,7 +33,9 @@
             this.updateToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.canvasSurface = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.canvasSurface)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -74,18 +76,29 @@
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             // 
+            // canvasSurface
+            // 
+            this.canvasSurface.BackColor = System.Drawing.Color.MediumSlateBlue;
+            this.canvasSurface.Location = new System.Drawing.Point(67, 67);
+            this.canvasSurface.Name = "canvasSurface";
+            this.canvasSurface.Size = new System.Drawing.Size(896, 391);
+            this.canvasSurface.TabIndex = 1;
+            this.canvasSurface.TabStop = false;
+            // 
             // WCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateBlue;
             this.ClientSize = new System.Drawing.Size(1183, 488);
+            this.Controls.Add(this.canvasSurface);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "WCMain";
             this.Text = "WordChamp";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.canvasSurface)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -98,5 +111,6 @@
         private ToolStripMenuItem updateToolStripMenuItem;
         private ToolStripMenuItem aboutToolStripMenuItem;
         private ToolStripMenuItem exitToolStripMenuItem;
+        private PictureBox canvasSurface;
     }
 }
