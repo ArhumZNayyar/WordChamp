@@ -1,8 +1,8 @@
 namespace WordChamp
 {
-    public partial class Form1 : Form
+    public partial class WCMain : Form
     {
-        public Form1()
+        public WCMain()
         {
             InitializeComponent();
         }
