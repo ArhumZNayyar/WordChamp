@@ -41,6 +41,7 @@ namespace WordChamp
             InitializeComponent();
             InitializeGrid(WCGrid);
             graphics = this.CreateGraphics();
+            answerBox.Parent = canvasSurface;
         }
 
         public void InitializeGrid(Grid grid)
