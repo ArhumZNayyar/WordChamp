@@ -98,6 +98,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "WCMain";
             this.Text = "WordChamp";
+            this.Load += new System.EventHandler(this.WCMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSurface)).EndInit();

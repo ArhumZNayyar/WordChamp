@@ -26,6 +26,7 @@ namespace WordChamp
         Graphics graphics;
         Grid WCGrid = new Grid();
         string word = "null";
+        private Font fnt = new Font("Arial", 10);
 
         public WCMain()
         {
@@ -45,6 +46,47 @@ namespace WordChamp
                     grid.createNode(col, row, grid);
                 }
             }
+        }
+
+        public void DrawNodes(Graphics g)
+        {
+            Pen drawColor = new Pen(Color.Black, 3);
+            int currNode = 0;
+            // Iterate through the rows and columns and draw the grid -> nodes
+            for (int row = 1; row <= WCGrid.maxRows; row++)
+            {
+                for (int col = 1; col <= WCGrid.maxColumns; col++)
+                {
+                    Rectangle rect = new Rectangle(64 * col, (64 * row), 25, 25);
+                    drawColor = new Pen(WCGrid.allNodes[currNode].getColor());
+                    g.DrawRectangle(drawColor, rect);
+                    g.DrawString(WCGrid.allNodes[currNode].userAnswer.ToString().ToUpper(),
+                fnt, System.Drawing.Brushes.Black, new Point((64 * col) + 3, (64 * row) + 3));
+                    currNode += 1;
+                }
+            }
+        }
+
+        private void canvasPaint(object sender, System.Windows.Forms.PaintEventArgs e)
+        {
+            // Create a local version of the graphics object for the Canvas.
+            Graphics canvasGraphics = e.Graphics;
+
+            // Draw a string on the Canvas that shows the topic.
+            // TODO: Get the topic from network
+            canvasGraphics.DrawString("Today's topic is: FROMSOFTWARE",
+                fnt, System.Drawing.Brushes.Black, new Point(30, 30));
+            // Call the function to draw the grid and nodes
+            DrawNodes(canvasGraphics);
+        }
+
+        private void WCMain_Load(object sender, EventArgs e)
+        {
+            // Connect the Paint event of the Canvas to the event handler method.
+            canvasSurface.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasPaint);
+
+            // Add the Canvas (Picturebox) control to the Form.
+            this.Controls.Add(canvasSurface);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
