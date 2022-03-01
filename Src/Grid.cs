@@ -45,6 +45,9 @@ namespace WordChamp.Src
                 this.trueAnswer = 'a';
             }
 
+            public bool checkAnswer() { return this.correct; }
+            public Color getColor() { return this.color; }
+
             public void setNode(int row, int column, Grid grid)
             {
                 this.rowPos = row;
