@@ -37,6 +37,7 @@
             this.canvasSurface = new System.Windows.Forms.PictureBox();
             this.mainTimer = new System.Windows.Forms.Timer(this.components);
             this.answerBox = new System.Windows.Forms.RichTextBox();
+            this.pointsLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSurface)).BeginInit();
             this.SuspendLayout();
@@ -105,12 +106,22 @@
             this.answerBox.TabIndex = 1;
             this.answerBox.Text = "";
             // 
+            // pointsLabel
+            // 
+            this.pointsLabel.AutoSize = true;
+            this.pointsLabel.Location = new System.Drawing.Point(469, 40);
+            this.pointsLabel.Name = "pointsLabel";
+            this.pointsLabel.Size = new System.Drawing.Size(74, 15);
+            this.pointsLabel.TabIndex = 2;
+            this.pointsLabel.Text = "Total Points: ";
+            // 
             // WCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateBlue;
             this.ClientSize = new System.Drawing.Size(1199, 527);
+            this.Controls.Add(this.pointsLabel);
             this.Controls.Add(this.answerBox);
             this.Controls.Add(this.canvasSurface);
             this.Controls.Add(this.menuStrip1);
@@ -137,5 +148,6 @@
         private PictureBox canvasSurface;
         private System.Windows.Forms.Timer mainTimer;
         private RichTextBox answerBox;
+        private Label pointsLabel;
     }
 }
