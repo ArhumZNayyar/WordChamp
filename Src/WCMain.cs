@@ -259,6 +259,13 @@ namespace WordChamp
 
         private void WCMain_Load(object sender, EventArgs e)
         {
+            // If the user is new, prompt for a login
+            if (String.IsNullOrEmpty(Properties.Settings.Default.userName))
+            {
+                Login login = new Login();
+                login.ShowDialog();
+                MessageBox.Show(Properties.Settings.Default.userName + " has been submitted", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
             // Connect the Paint event of the Canvas to the event handler method.
             canvasSurface.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasPaint);
 
