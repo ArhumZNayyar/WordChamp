@@ -17,6 +17,9 @@
  *   
 */
 
+using System.ComponentModel;
+using System.Diagnostics;
+using System.Net;
 using WordChamp.Src;
 
 namespace WordChamp
@@ -39,9 +42,97 @@ namespace WordChamp
         public WCMain()
         {
             InitializeComponent();
+            CheckUpdate();
             InitializeGrid(WCGrid);
             graphics = this.CreateGraphics();
             answerBox.Parent = canvasSurface;
+        }
+
+        public void CheckUpdate()
+        {
+            string version = System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString();
+
+            Console.WriteLine("Current version: " + version);
+
+            string fileContent = new WebClient().DownloadString("https://www.dropbox.com/s/0xo2kda53umwbz0/App_Update.txt?dl=1");
+            if (fileContent != version)
+            {
+                var result = MessageBox.Show("New update available.\nDownload Update?", "Update Available", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (result == DialogResult.Yes)
+                {
+                    Console.WriteLine("New version: " + fileContent);
+                    Console.WriteLine("Version mismatch. Updating program.");
+                    dlProgressBar.Visible = true;
+                    dlProgLabel.Visible = true;
+                    using (var client = new WebClient())
+                    {
+                        Uri URL = new Uri("https://www.dropbox.com/s/822lbovvoqfue0e/Word%20Champ.dll?dl=1");
+                        client.DownloadFile(URL, Application.StartupPath + @"\tempClient\Word Champ.dll");
+                        client.DownloadFileCompleted += new AsyncCompletedEventHandler(Completed);
+                        client.DownloadProgressChanged += new DownloadProgressChangedEventHandler(ProgressChanged);
+                        URL = new Uri("https://www.dropbox.com/s/kx34nglxx65o783/Word%20Champ.exe?dl=1");
+                        client.DownloadFileAsync(URL, Application.StartupPath + @"\tempClient\Word Champ.exe");
+                        Console.WriteLine(Application.StartupPath);
+                    }
+                }
+                else
+                {
+                    Environment.Exit(0);
+                    Application.Exit();
+                }
+            }
+            Console.WriteLine("Updating Solution");
+            try
+            {
+                fileContent = new WebClient().DownloadString("https://www.dropbox.com/s/foobtbypiop8030/App_Key.txt?dl=1");
+                Console.WriteLine(fileContent);
+                this.word = fileContent;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Exception Caught", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        // The event that will trigger when the WebClient is completed
+        private void Completed(object sender, AsyncCompletedEventArgs e)
+        {
+            if (e.Cancelled == true)
+            {
+                MessageBox.Show("Download has been canceled.\nPress OK to retry.");
+                Application.Restart();
+            }
+            else
+            {
+                MessageBox.Show("Download complete. \nPress OK to Update.", "Update");
+
+                // Rename current process
+                var self = System.Reflection.Assembly.GetExecutingAssembly().Location;
+                var selfFileName = Path.GetFileName(self);
+                var selfWithoutExt = Path.Combine(Path.GetDirectoryName(self), Path.GetFileNameWithoutExtension(self));
+                System.IO.File.Move(selfWithoutExt + ".exe", "WC.exe");
+
+                // Start batch file that will delete old program and move/start the new one
+                ProcessStartInfo startInfo = new ProcessStartInfo("patchhelp.bat");
+                startInfo.CreateNoWindow = true;
+                startInfo.UseShellExecute = false;
+                startInfo.WorkingDirectory = Path.GetDirectoryName(self);
+                Process.Start(startInfo);
+                Application.ExitThread();
+                Application.Exit();
+            }
+        }
+
+        private void ProgressChanged(object sender, DownloadProgressChangedEventArgs e)
+        {
+            // Update the progressbar percentage
+            Console.WriteLine("Downloading Update: " + e.ProgressPercentage + "%");
+            dlProgressBar.Value = e.ProgressPercentage;
+
+            // Update the label with how much data have been downloaded so far and the total size of the file we are currently downloading
+            dlProgLabel.Text = string.Format("{0} MB's / {1} MB's",
+                (e.BytesReceived / 1024d / 1024d).ToString("0.00"),
+                (e.TotalBytesToReceive / 1024d / 1024d).ToString("0.00"));
         }
 
         public void InitializeGrid(Grid grid)

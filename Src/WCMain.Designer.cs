@@ -38,6 +38,8 @@
             this.mainTimer = new System.Windows.Forms.Timer(this.components);
             this.answerBox = new System.Windows.Forms.RichTextBox();
             this.pointsLabel = new System.Windows.Forms.Label();
+            this.dlProgressBar = new System.Windows.Forms.ProgressBar();
+            this.dlProgLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSurface)).BeginInit();
             this.SuspendLayout();
@@ -115,12 +117,30 @@
             this.pointsLabel.TabIndex = 2;
             this.pointsLabel.Text = "Total Points: ";
             // 
+            // dlProgressBar
+            // 
+            this.dlProgressBar.Location = new System.Drawing.Point(469, 492);
+            this.dlProgressBar.Name = "dlProgressBar";
+            this.dlProgressBar.Size = new System.Drawing.Size(150, 23);
+            this.dlProgressBar.TabIndex = 3;
+            // 
+            // dlProgLabel
+            // 
+            this.dlProgLabel.AutoSize = true;
+            this.dlProgLabel.Location = new System.Drawing.Point(479, 474);
+            this.dlProgLabel.Name = "dlProgLabel";
+            this.dlProgLabel.Size = new System.Drawing.Size(109, 15);
+            this.dlProgLabel.TabIndex = 4;
+            this.dlProgLabel.Text = "Download Progress";
+            // 
             // WCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateBlue;
             this.ClientSize = new System.Drawing.Size(1199, 527);
+            this.Controls.Add(this.dlProgLabel);
+            this.Controls.Add(this.dlProgressBar);
             this.Controls.Add(this.pointsLabel);
             this.Controls.Add(this.answerBox);
             this.Controls.Add(this.canvasSurface);
@@ -149,5 +169,7 @@
         private System.Windows.Forms.Timer mainTimer;
         private RichTextBox answerBox;
         private Label pointsLabel;
+        private ProgressBar dlProgressBar;
+        private Label dlProgLabel;
     }
 }
