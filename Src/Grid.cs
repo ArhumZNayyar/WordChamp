@@ -15,6 +15,13 @@ namespace WordChamp.Src
         public List<Node> allNodes = new List<Node>();
         public Grid.Node? Nodes;
 
+        public void createNode(int row, int column, Grid grid)
+        {
+            Nodes = new Grid.Node();
+            Nodes.setNode(row, column, grid);
+            allNodes.Add(Nodes);
+        }
+
         public class Node : Grid
         {
             /* Node Data */
@@ -37,6 +44,32 @@ namespace WordChamp.Src
                 this.correct = false;
                 this.trueAnswer = 'a';
             }
+
+            public void setNode(int row, int column, Grid grid)
+            {
+                this.rowPos = row;
+                this.colPos = column;
+                this.x = 64 * row;
+                this.y = 64 * column;
+                this.trueAnswer = grid.word[row - 1];
+                this.trueAnswer = Char.ToUpper(this.trueAnswer);
+            }
+
+            public void addAnswer(char ans)
+            {
+                this.userAnswer = ans;
+                if (this.userAnswer == this.trueAnswer)
+                {
+                    this.color = Color.Green;
+                    this.correct = true;
+                }
+                else
+                {
+                    this.color = Color.Red;
+                    this.correct = false;
+                }
+            }
+
         }
     }
 }
