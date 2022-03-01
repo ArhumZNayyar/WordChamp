@@ -40,6 +40,8 @@
             this.pointsLabel = new System.Windows.Forms.Label();
             this.dlProgressBar = new System.Windows.Forms.ProgressBar();
             this.dlProgLabel = new System.Windows.Forms.Label();
+            this.userLabel = new System.Windows.Forms.Label();
+            this.usernameLabel = new System.Windows.Forms.Label();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSurface)).BeginInit();
             this.SuspendLayout();
@@ -123,6 +125,7 @@
             this.dlProgressBar.Name = "dlProgressBar";
             this.dlProgressBar.Size = new System.Drawing.Size(150, 23);
             this.dlProgressBar.TabIndex = 3;
+            this.dlProgressBar.Visible = false;
             // 
             // dlProgLabel
             // 
@@ -132,6 +135,26 @@
             this.dlProgLabel.Size = new System.Drawing.Size(109, 15);
             this.dlProgLabel.TabIndex = 4;
             this.dlProgLabel.Text = "Download Progress";
+            this.dlProgLabel.Visible = false;
+            // 
+            // userLabel
+            // 
+            this.userLabel.AutoSize = true;
+            this.userLabel.Location = new System.Drawing.Point(1082, 24);
+            this.userLabel.Name = "userLabel";
+            this.userLabel.Size = new System.Drawing.Size(33, 15);
+            this.userLabel.TabIndex = 5;
+            this.userLabel.Text = "User:";
+            // 
+            // usernameLabel
+            // 
+            this.usernameLabel.AutoSize = true;
+            this.usernameLabel.ForeColor = System.Drawing.Color.LightGreen;
+            this.usernameLabel.Location = new System.Drawing.Point(1112, 24);
+            this.usernameLabel.Name = "usernameLabel";
+            this.usernameLabel.Size = new System.Drawing.Size(27, 15);
+            this.usernameLabel.TabIndex = 6;
+            this.usernameLabel.Text = "null";
             // 
             // WCMain
             // 
@@ -139,6 +162,8 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateBlue;
             this.ClientSize = new System.Drawing.Size(1199, 527);
+            this.Controls.Add(this.usernameLabel);
+            this.Controls.Add(this.userLabel);
             this.Controls.Add(this.dlProgLabel);
             this.Controls.Add(this.dlProgressBar);
             this.Controls.Add(this.pointsLabel);
@@ -171,5 +196,7 @@
         private Label pointsLabel;
         private ProgressBar dlProgressBar;
         private Label dlProgLabel;
+        private Label userLabel;
+        private Label usernameLabel;
     }
 }

@@ -266,6 +266,7 @@ namespace WordChamp
                 login.ShowDialog();
                 MessageBox.Show(Properties.Settings.Default.userName + " has been submitted", "Validation", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            usernameLabel.Text = Properties.Settings.Default.userName;
             // Connect the Paint event of the Canvas to the event handler method.
             canvasSurface.Paint += new System.Windows.Forms.PaintEventHandler(this.canvasPaint);
 
