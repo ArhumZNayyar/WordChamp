@@ -23,10 +23,16 @@ namespace WordChamp
 {
     public partial class WCMain : Form
     {
-        Graphics graphics;
-        Grid WCGrid = new Grid();
-        string word = "null";
+        private Graphics graphics;
+        private Grid WCGrid = new Grid();
         private Font fnt = new Font("Arial", 10);
+
+        int currentRow = 0;
+        int currentColumn = 0;
+        int currentNode = 0;
+        string word = "null";
+        bool completed = false;
+        
 
         public WCMain()
         {
@@ -67,6 +73,29 @@ namespace WordChamp
             }
         }
 
+        public void checkInput()
+        {
+            if (!String.IsNullOrEmpty(answerBox.Text))
+            {
+                // Set the entered character to uppercase
+                answerBox.Text = answerBox.Text.ToUpper();
+                // Add the users input as an answer to the node they are currently on
+                WCGrid.allNodes[currentNode].addAnswer(answerBox.Text[0]);
+                // Increment the current node / column the user is on
+                currentNode++;
+                currentColumn++;
+                // Check if the user has completed every possible node
+                if (currentNode == WCGrid.allNodes.Count)
+                {
+                    completed = true;
+                    return;
+                }
+                // Reset the textbox to a new location (next node) and set the text to null
+                answerBox.Location = new Point(WCGrid.allNodes[currentNode].x + 3, WCGrid.allNodes[currentNode].y + 3);
+                answerBox.Text = null;
+            }
+        }
+
         private void canvasPaint(object sender, System.Windows.Forms.PaintEventArgs e)
         {
             // Create a local version of the graphics object for the Canvas.
@@ -93,6 +122,8 @@ namespace WordChamp
         {
             this.Refresh();
             this.canvasSurface.Refresh();
+            if (!completed)
+                checkInput();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)

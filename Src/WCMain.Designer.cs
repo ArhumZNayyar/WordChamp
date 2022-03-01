@@ -36,6 +36,7 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.canvasSurface = new System.Windows.Forms.PictureBox();
             this.mainTimer = new System.Windows.Forms.Timer(this.components);
+            this.answerBox = new System.Windows.Forms.RichTextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSurface)).BeginInit();
             this.SuspendLayout();
@@ -93,12 +94,24 @@
             this.mainTimer.Enabled = true;
             this.mainTimer.Tick += new System.EventHandler(this.mainTimer_Tick);
             // 
+            // answerBox
+            // 
+            this.answerBox.Location = new System.Drawing.Point(66, 67);
+            this.answerBox.MaxLength = 1;
+            this.answerBox.Multiline = false;
+            this.answerBox.Name = "answerBox";
+            this.answerBox.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.None;
+            this.answerBox.Size = new System.Drawing.Size(20, 20);
+            this.answerBox.TabIndex = 1;
+            this.answerBox.Text = "";
+            // 
             // WCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateBlue;
             this.ClientSize = new System.Drawing.Size(1199, 527);
+            this.Controls.Add(this.answerBox);
             this.Controls.Add(this.canvasSurface);
             this.Controls.Add(this.menuStrip1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -123,5 +136,6 @@
         private ToolStripMenuItem exitToolStripMenuItem;
         private PictureBox canvasSurface;
         private System.Windows.Forms.Timer mainTimer;
+        private RichTextBox answerBox;
     }
 }
