@@ -299,5 +299,13 @@ namespace WordChamp
             AboutBox aboutBox = new AboutBox();
             aboutBox.ShowDialog();
         }
+
+        private void updateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CheckUpdate();
+            // If this next line executes then there was no update since it would restart the application.
+            MessageBox.Show("You are running the latest version: " +
+                System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(), "Update");
+        }
     }
 }
