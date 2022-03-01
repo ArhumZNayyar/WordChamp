@@ -45,8 +45,11 @@
             this.userLabel = new System.Windows.Forms.Label();
             this.usernameLabel = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.label1 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.updateLadderButton = new System.Windows.Forms.Button();
+            this.pointsEarnedLabel = new System.Windows.Forms.Label();
+            this.ladderTimer = new System.Windows.Forms.Timer(this.components);
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.canvasSurface)).BeginInit();
             this.panel1.SuspendLayout();
@@ -143,7 +146,7 @@
             // pointsLabel
             // 
             this.pointsLabel.AutoSize = true;
-            this.pointsLabel.Location = new System.Drawing.Point(469, 40);
+            this.pointsLabel.Location = new System.Drawing.Point(940, 24);
             this.pointsLabel.Name = "pointsLabel";
             this.pointsLabel.Size = new System.Drawing.Size(74, 15);
             this.pointsLabel.TabIndex = 2;
@@ -195,15 +198,6 @@
             this.panel1.Size = new System.Drawing.Size(200, 391);
             this.panel1.TabIndex = 7;
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(987, 49);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(118, 15);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Next Ladder Update: ";
-            // 
             // richTextBox1
             // 
             this.richTextBox1.BackColor = System.Drawing.Color.DarkSlateBlue;
@@ -213,12 +207,48 @@
             this.richTextBox1.TabIndex = 9;
             this.richTextBox1.Text = "";
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(987, 49);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(118, 15);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Next Ladder Update: ";
+            // 
+            // updateLadderButton
+            // 
+            this.updateLadderButton.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.updateLadderButton.Location = new System.Drawing.Point(1051, 464);
+            this.updateLadderButton.Name = "updateLadderButton";
+            this.updateLadderButton.Size = new System.Drawing.Size(88, 23);
+            this.updateLadderButton.TabIndex = 9;
+            this.updateLadderButton.Text = "Update Now";
+            this.updateLadderButton.UseVisualStyleBackColor = true;
+            // 
+            // pointsEarnedLabel
+            // 
+            this.pointsEarnedLabel.AutoSize = true;
+            this.pointsEarnedLabel.Location = new System.Drawing.Point(488, 49);
+            this.pointsEarnedLabel.Name = "pointsEarnedLabel";
+            this.pointsEarnedLabel.Size = new System.Drawing.Size(85, 15);
+            this.pointsEarnedLabel.TabIndex = 10;
+            this.pointsEarnedLabel.Text = "Points Earned: ";
+            // 
+            // ladderTimer
+            // 
+            this.ladderTimer.Enabled = true;
+            this.ladderTimer.Interval = 900000;
+            this.ladderTimer.Tick += new System.EventHandler(this.ladderTimer_Tick);
+            // 
             // WCMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.SlateBlue;
             this.ClientSize = new System.Drawing.Size(1199, 527);
+            this.Controls.Add(this.pointsEarnedLabel);
+            this.Controls.Add(this.updateLadderButton);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.usernameLabel);
@@ -265,5 +295,8 @@
         private Panel panel1;
         private RichTextBox richTextBox1;
         private Label label1;
+        private Button updateLadderButton;
+        private Label pointsEarnedLabel;
+        private System.Windows.Forms.Timer ladderTimer;
     }
 }

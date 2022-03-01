@@ -46,5 +46,17 @@ namespace WordChamp.Properties {
                 this["State"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public long Points {
+            get {
+                return ((long)(this["Points"]));
+            }
+            set {
+                this["Points"] = value;
+            }
+        }
     }
 }

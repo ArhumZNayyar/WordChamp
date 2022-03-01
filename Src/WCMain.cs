@@ -235,32 +235,38 @@ namespace WordChamp
                 // If the total amount of correct nodes is the same as the word length then the user has guessed the word
                 if (totalCorrect == this.word.Length)
                 {
-                    MessageBox.Show("You win!");
                     completed = true;
                     switch (currentRow)
                     {
                         case 1:
                             Console.WriteLine("First try! +1000 points");
-                            totalPoints += 1000;
+                            distributePoints(1000);
+                            pointsEarnedLabel.Text += 1000;
                             break;
                         case 2:
                             Console.WriteLine("Second try. +500 points");
-                            totalPoints += 500;
+                            distributePoints(500);
+                            pointsEarnedLabel.Text += 500;
                             break;
                         case 3:
                             Console.WriteLine("Third try. +250 points");
-                            totalPoints += 250;
+                            distributePoints(250);
+                            pointsEarnedLabel.Text += 250;
                             break;
                         case 4:
                             Console.WriteLine("Fourth try. +100 points");
-                            totalPoints += 100;
+                            distributePoints(100);
+                            pointsEarnedLabel.Text += 100;
                             break;
                         case 5:
                             Console.WriteLine("Fifth try. +25 points");
-                            totalPoints += 25;
+                            distributePoints(25);
+                            pointsEarnedLabel.Text += 25;
                             break;
                         default:
-                            Console.WriteLine("Failed all attempts. No points.");
+                            Console.WriteLine("Failed all attempts. Lose points.");
+                            distributePoints(-1000);
+                            pointsEarnedLabel.Text += -1000;
                             break;
                     }
                 }
@@ -269,6 +275,13 @@ namespace WordChamp
                     totalCorrect = 0;
                 }
             }
+        }
+
+        private void distributePoints(int points)
+        {
+            totalPoints += points;
+            Properties.Settings.Default.Points += totalPoints;
+            Properties.Settings.Default.Save();
         }
 
         private void canvasPaint(object sender, System.Windows.Forms.PaintEventArgs e)
@@ -313,7 +326,7 @@ namespace WordChamp
                 answerBox.Enabled = false;
                 answerBox.Visible = false;
             }
-            pointsLabel.Text = "Total Points: " + totalPoints;
+            pointsLabel.Text = "Total Points: " + Properties.Settings.Default.Points;
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -338,6 +351,11 @@ namespace WordChamp
         private void toolStripMenuItem1_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void ladderTimer_Tick(object sender, EventArgs e)
+        {
+
         }
     }
 }
