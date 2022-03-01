@@ -89,9 +89,16 @@ namespace WordChamp
             this.Controls.Add(canvasSurface);
         }
 
+        private void mainTimer_Tick(object sender, EventArgs e)
+        {
+            this.Refresh();
+            this.canvasSurface.Refresh();
+        }
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
     }
 }
