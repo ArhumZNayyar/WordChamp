@@ -20,6 +20,7 @@
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Net;
+using System.Runtime.InteropServices;
 using WordChamp.Src;
 
 namespace WordChamp
@@ -29,6 +30,12 @@ namespace WordChamp
         private Graphics graphics;
         private Grid WCGrid = new Grid();
         private Font fnt = new Font("Arial", 10);
+        public const int WM_NCLBUTTONDOWN = 0xA1;
+        public const int HT_CAPTION = 0x2;
+        [DllImportAttribute("user32.dll")]
+        public static extern int SendMessage(IntPtr hWnd, int Msg, int wParam, int lParam);
+        [DllImportAttribute("user32.dll")]
+        public static extern bool ReleaseCapture();
 
         int currentRow = 0;
         int currentColumn = 0;
@@ -37,7 +44,27 @@ namespace WordChamp
         int totalPoints = 0;
         string word = "null";
         bool completed = false;
-        
+
+        /*
+            Windows API:
+            0x84 = WM_NCHITTEST - Mouse Capture Test
+            0xA1 = WM_NCLBUTTONDOWN - Left MB Capture
+            0x2 = HTCAPTION - Application Title Bar
+            
+            Intercept all commands that were sent to the application.
+            If it is a mouse click, pass the action to the base action and
+            reassign the action to the title bar to allow it to be dragged.
+
+            Connect the Mouse Down event to this function.
+        */
+        private void WCMain_MouseDown(object sender, System.Windows.Forms.MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                ReleaseCapture();
+                SendMessage(Handle, WM_NCLBUTTONDOWN, HT_CAPTION, 0);
+            }
+        }
 
         public WCMain()
         {
@@ -306,6 +333,11 @@ namespace WordChamp
             // If this next line executes then there was no update since it would restart the application.
             MessageBox.Show("You are running the latest version: " +
                 System.Reflection.Assembly.GetExecutingAssembly().GetName().Version.ToString(), "Update");
+        }
+
+        private void toolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }
